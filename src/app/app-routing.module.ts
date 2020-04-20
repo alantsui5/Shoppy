@@ -15,16 +15,21 @@ import {canActivate,redirectUnauthorizedTo, AngularFireAuthGuard, redirectLogged
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "cart", component: Cart2Component, ...canActivate(redirectUnauthorizedTo(['login']))},
-  { path: "login", component: LoginComponent , ...canActivate(redirectLoggedInTo(['']))},
-  { path: "register", component: RegisterComponent, ...canActivate(redirectLoggedInTo([''])) },
+  { path: "cart", component: Cart2Component, },
+  { path: "login", component: LoginComponent ,},
+  { path: "register", component: RegisterComponent,},
   { path: "products", component: ProductsComponent },
   { path: "about", component: AboutComponent },
-  { path: "sell", component: ProductaddComponent, ...canActivate(redirectUnauthorizedTo(['login'])) },
+  { path: "sell", 
+    component: ProductaddComponent, 
+
+  },
   { path: 'products/:productId', component: ProductDetailsComponent },
-  { path: 'usersettings', component: UserSettingsComponent, ...canActivate(redirectUnauthorizedTo(['login'])) },
-  { path: 'userprofile/:userId', component: UserSettingsComponent,...canActivate(redirectUnauthorizedTo(['login'])) },
-  { path: "checkout", component: CheckoutComponent , ...canActivate(redirectUnauthorizedTo(['login']))},
+  { path: 'usersettings', component: UserSettingsComponent, },
+  { path: 'userprofile/:userId', 
+    component: UserSettingsComponent, 
+  },
+  { path: "checkout", component: CheckoutComponent , },
   { path: '**', component: NotFoundComponent },
 
 ];
