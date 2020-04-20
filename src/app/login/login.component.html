@@ -1,0 +1,78 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <div>
+            <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-on-white.svg"
+                alt="Workflow" />
+            <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+                Sign in to your account
+            </h2>
+            <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
+                Or
+                <button nz-button nzType="link" [routerLink]="['/register']">
+                    Register
+                </button>
+        </div>
+        <form nz-form class="mt-8" [formGroup]="myForm" (ngSubmit)="submitHandler()">
+
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+                <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+                    <input nz-input formControlName="email" id="email" placeholder="Email"
+                        class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+                <nz-form-control [nzSm]="18" [nzXs]="24" nzErrorTip="Please input your password!">
+                    <input class="block w-full " nz-input type="password" id="password" formControlName="password"
+                        placeholder="password"
+                        class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500" />
+                </nz-form-control>
+            </nz-form-item>
+
+
+            <div class=" mt-6 flex items-center justify-between">
+
+                <div class="text-sm leading-5">
+                    <a href="#"
+                        class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                        Forgot your password?
+                    </a>
+                </div>
+                <div class="text-sm leading-5">
+                    <a href="#"
+                        class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                        Resend Verification Mail?
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <div class="flex">
+                    <button type="submit" nz-button nzType="primary" class="relative w-2/5" nzBlock>
+                        <span class="absolute left-0 inset-y pl-3">
+                            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        Sign In</button>
+                    <p class="mt-2 text-center text-sm leading-5 text-gray-600 w-1/5">
+                        Or
+                    </p>
+                    <button (click)="this.auth.googleSignin()" type="submit" nz-button class="w-2/5" nzType="danger"
+                        nzBlock>
+
+                        Sign In With <fa-icon [icon]="faGoogle"></fa-icon>oogle
+                    </button>
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>

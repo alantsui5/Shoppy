@@ -1,0 +1,157 @@
+<div class="flex justify-around align-center mt-5">
+    <div>
+        <h2 class="text-2xl text-extrabold">Please Add Your Product</h2>
+        <form class="mt-8 w-full" [formGroup]="pForm" (ngSubmit)="addProduct()">
+            
+            <div class="text-center">
+                <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
+            </div>
+    
+            <div class="form-group">
+                <label>Select file to upload</label>
+                <input type="file" accept="image/*" class="form-control" #fileUploader formControlName="image"
+                    (change)="showPreview($event)">
+                <div class="text-danger" *ngIf="isSubmitted && image.errors?.required">This field is
+                    required.</div>
+            </div> 
+
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-full px-3">
+                    <input formControlName="name" [ngClass]="{'border-red-500':name.invalid && name.touched}"
+                    class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500"
+                         type="text" placeholder="Name">
+                    <p *ngIf="name.invalid && name.touched" class="text-red-500 text-xs italic">Please input
+                        the
+                        name of Product
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-full px-3">
+                    <input formControlName="price" [ngClass]="{'border-red-500':price.invalid && price.touched}"
+                    class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500"
+                        placeholder="Price" />
+                    <p *ngIf="price.invalid && price.touched" class="text-red-500 text-xs italic">Please input
+                        the
+                        price
+                    </p>
+                </div>
+            </div>
+
+            <div class="-mx-3 md:flex mb-6">
+                <div class="md:w-full px-3">
+                    <textarea formControlName="description"
+                        [ngClass]="{'border-red-500':description.invalid && description.touched}"
+                        class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500"
+                        placeholder="Description"></textarea>
+                    <p *ngIf="description.invalid && description.touched" class="text-red-500 text-xs italic">
+                        Please input the description
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex items-center justify-between">
+                <div class="flex items-center">
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <button type="submit" [disabled]="pForm.invalid" [ngClass]="{'opacity-50
+                        cursor-not-allowed':pForm.invalid}"
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                    <span class="absolute left-0 inset-y pl-3">
+                        <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    List Now
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+<!--
+<div class="flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-md w-full">
+                <div>
+        
+                    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+                        Please Add Your Product
+                    </h2>
+        
+                </div>
+        
+                <form class="mt-8 w-full" [formGroup]="pForm" (ngSubmit)="addProduct()">
+                    
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <input formControlName="name" [ngClass]="{'border-red-500':name.invalid && name.touched}"
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                id="grid-last-name" type="text" placeholder="Name">
+                            <p *ngIf="name.invalid && name.touched" class="text-red-500 text-xs italic">Please input
+                                the
+                                name of Product
+                            </p>
+                        </div>
+        
+                    </div>
+        
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <input formControlName="price" [ngClass]="{'border-red-500':price.invalid && price.touched}"
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                placeholder="Price" />
+                            <p *ngIf="price.invalid && price.touched" class="text-red-500 text-xs italic">Please input
+                                the
+                                price
+                            </p>
+                        </div>
+                    </div>
+        
+                    <div class="-mx-3 md:flex mb-6">
+                        <div class="md:w-full px-3">
+                            <textarea formControlName="description"
+                                [ngClass]="{'border-red-500':description.invalid && description.touched}"
+                                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                                placeholder="Description"></textarea>
+                            <p *ngIf="description.invalid && description.touched" class="text-red-500 text-xs italic">
+                                Please input the description
+                            </p>
+                        </div>
+                    </div>
+        
+                    <div class="mt-6 flex items-center justify-between">
+                        <div class="flex items-center">
+                        </div>
+                    </div>
+        
+                    <div class="mt-6">
+                        <button type="submit" [disabled]="pForm.invalid" [ngClass]="{'opacity-50
+                                cursor-not-allowed':pForm.invalid}"
+                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                            <span class="absolute left-0 inset-y pl-3">
+                                <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            List Now
+                        </button>
+                    </div>
+        
+                </form>
+            </div>
+        </div>
+    </div>
+-->

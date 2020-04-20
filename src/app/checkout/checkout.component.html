@@ -1,0 +1,24 @@
+<div class="container mx-auto px-4 sm:px-8 mt-10">
+
+  <div class="flex justify-center mb-3">
+    <h1 class="text-3xl">Checkout</h1>
+  </div>
+
+
+  <nz-steps [nzCurrent]="current">
+    <nz-step nzTitle="Payment Detail" nzIcon="solution"></nz-step>
+    <nz-step nzTitle="Review Your Order" [nzIcon]="iconTemplate2"></nz-step>
+    <ng-template #iconTemplate2><i nz-icon nzType="smile"></i></ng-template>
+  </nz-steps>
+
+  <div class="steps-content" *ngIf="current===0">
+    <app-shipping-address (onNext)="changeCurrent($event)"></app-shipping-address>
+  </div>
+
+  <div class="steps-content" *ngIf="current===1">
+    <app-summary></app-summary>
+  </div>
+
+  
+
+</div>

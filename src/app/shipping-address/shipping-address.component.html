@@ -1,0 +1,32 @@
+<div class="steps-content">
+<h1 class="text-2xl my-5">Shipping Address</h1>
+<form [formGroup]="shippingForm" (ngSubmit)="shippingSend()">
+<div class="mx-5 md:flex mb-6">
+    <div class="w-64 px-3">
+        <input formControlName="address" [ngClass]="{'border-red-500':address.invalid && address.touched}"
+            class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500"
+            id="grid-last-name" type="text" placeholder="Shipping Address">
+        <p *ngIf="address.invalid && address.touched" class="text-red-500 text-xs italic">Please input the shipping address
+        </p>
+    </div>
+</div>
+<div class="mx-5 md:flex mb-6">
+    <div class="w-64 px-3">
+        <input formControlName="creditCard" [ngClass]="{'border-red-500':creditCard.invalid && creditCard.touched}"
+            class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500"
+            id="grid-last-name" type="text" placeholder="Credit Card Number">
+        <p *ngIf="creditCard.invalid && creditCard.touched" class="text-red-500 text-xs italic">Please input the shipping address
+        </p>
+    </div>
+    <div class="w-60 px-3">
+        <input formControlName="cvv" [ngClass]="{'border-red-500':cvv.invalid && cvv.touched}"
+            class="bg-white appearance-none border-2 border-black rounded w-full py-4 px-4 text-gray-900 leading-tight focus:outline-none focus:border-indigo-500"
+            id="grid-last-name" type="text" placeholder="CVV Number">
+        <p *ngIf="cvv.invalid && cvv.touched" class="text-red-500 text-xs italic">Please input the shipping address
+        </p>
+    </div>
+</div>
+<button nz-button type="submit" [disabled]="shippingForm.invalid">Next</button>
+</form>
+</div>
+

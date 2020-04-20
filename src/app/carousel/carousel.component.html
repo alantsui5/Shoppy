@@ -1,0 +1,21 @@
+<nz-carousel nzAutoPlay class="relative">
+    <div nz-carousel-content *ngFor="let slide of slides" class="rounded-md">
+        <img [routerLink]="['/products',slide.Id]" src={{slide.image}}
+            class="top-0 right-0 w-full h-full object-cover" />
+
+        <h2 class=" absolute top-0 ml-8 mt-16 text-3xl font-extrabold text-gray-900 sm:text-5xl sm:leading-none
+            md:text-5xl text-align-center">
+            {{slide.name}}</h2>
+        <span class="text-indigo-600 absolute left-0 top-0 ml-8 mt-32 sm:mt-24 pt-2 text-3xl sm:text-5xl">
+            {{slide.description}}</span>
+
+        <button [routerLink]="['/products',slide.Id]" nz-button nzType="primary" nzSize="large"
+            class="absolute right-0 bottom-0 m-10 mr-48 bg-white text-indigo-600 border-transparent">View
+            Product</button>
+
+        <button nz-button nzType="primary" nzSize="large" class="absolute right-0 bottom-0 m-10"
+            (click)="addToCart(slide)">Add To
+            Cart</button>
+
+    </div>
+</nz-carousel>
