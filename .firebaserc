@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "practice-f4c73": {
+      "hosting": {
+        "test2": [
+          "practice-f4c73"
+        ]
+      }
+    }
+  }
+}
