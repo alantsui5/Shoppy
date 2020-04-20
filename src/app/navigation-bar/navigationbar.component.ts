@@ -27,7 +27,6 @@ export class NavigationbarComponent implements OnInit {
   navitems = [
     { title: "Product", link: "/products", key: '1' },
     { title: "About Us", link: "/about", key: '2' },
-    { title: "Cart", link: "/cart", key: '3' }
   ]
   title = "Shoppy";
   open = false;

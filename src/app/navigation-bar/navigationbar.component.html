@@ -42,7 +42,10 @@
                         </ng-template>
                         <ng-template #authenticated>
                             <a nz-dropdown [nzDropdownMenu]="menu" class="py-2 ml-4">
-
+                                <a
+                            class="ml-2 font-medium text-gray-500 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition duration-150 ease-in-out mr-5"
+                            [routerLink]="['/cart']">
+                            Cart</a>
                                 <nz-avatar *ngIf="!auth.currentuser.photoURL" nzText="U" [nzShape]="'square'"
                                     class="mr-1">
                                 </nz-avatar>
