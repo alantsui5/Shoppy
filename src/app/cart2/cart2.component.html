@@ -14,7 +14,6 @@
             </th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -29,9 +28,6 @@
             </td>
             <td>{{ data.price | currency}}</td>
             <td>{{ this.cartService.quantity[data.Id] }}</td>
-            <td><button (click)="deleteItem(data)">
-                <fa-icon class="text-red-500" [icon]="FaTrash"></fa-icon>
-              </button></td>
           </tr>
         </tbody>
       </nz-table>
