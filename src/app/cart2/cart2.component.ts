@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from 'service/cart/cart.service';
 import { Product } from 'interface/product';
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-cart2',
   templateUrl: './cart2.component.html',
@@ -16,9 +16,8 @@ export class Cart2Component {
   listOfData: Product[];
   listOfDisplayData: Product[];
 
-  FaTrash = faTrash;
-
   constructor(public cartService: CartService) { }
+
   ngOnInit() {
     this.listOfData = this.cartService.items;
     this.listOfDisplayData = [...this.listOfData];
@@ -29,6 +28,8 @@ export class Cart2Component {
   }
   deleteItem(product: Product) {
     this.cartService.deleteFromCart(product);
+    this.listOfData = [...this.cartService.items];
+    this.listOfDisplayData  = [...this.cartService.items];
   }
 
   sort(sortName: string, value: string): void {
@@ -36,10 +37,15 @@ export class Cart2Component {
     this.sortValue = value;
     this.search();
   }
-  faTrash = faTrash;
   filterAddressChange(value: string[]): void {
     this.listOfSearchAddress = value;
     this.search();
+  }
+
+  cleanCart() {
+    this.cartService.clearCart();
+    this.listOfData = [...this.cartService.items];
+    this.listOfDisplayData  = [...this.cartService.items];
   }
 
 

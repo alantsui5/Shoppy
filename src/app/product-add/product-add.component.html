@@ -2,18 +2,18 @@
     <div>
         <h2 class="text-2xl text-extrabold">Please Add Your Product</h2>
         <form class="mt-8 w-full" [formGroup]="pForm" (ngSubmit)="addProduct()">
-            
+
             <div class="text-center">
-                <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">
+                <img [src]="imgSrc" width="350px" height="250px"  alt="product image"(click)="fileUploader.click()">
             </div>
-    
+
             <div class="form-group">
                 <label>Select file to upload</label>
                 <input type="file" accept="image/*" class="form-control" #fileUploader formControlName="image"
                     (change)="showPreview($event)">
                 <div class="text-danger" *ngIf="isSubmitted && image.errors?.required">This field is
                     required.</div>
-            </div> 
+            </div>
 
             <div class="-mx-3 md:flex mb-6">
                 <div class="md:w-full px-3">
@@ -58,8 +58,7 @@
             </div>
 
             <div class="mt-6">
-                <button type="submit" [disabled]="pForm.invalid" [ngClass]="{'opacity-50
-                        cursor-not-allowed':pForm.invalid}"
+                <button type="submit" [disabled]="pForm.invalid" [ngClass]="{'opacity-50':pForm.invalid}"
                     class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
                     <span class="absolute left-0 inset-y pl-3">
                         <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
@@ -83,15 +82,15 @@
 <div class="flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full">
                 <div>
-        
+
                     <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
                         Please Add Your Product
                     </h2>
-        
+
                 </div>
-        
+
                 <form class="mt-8 w-full" [formGroup]="pForm" (ngSubmit)="addProduct()">
-                    
+
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
                             <input formControlName="name" [ngClass]="{'border-red-500':name.invalid && name.touched}"
@@ -102,9 +101,9 @@
                                 name of Product
                             </p>
                         </div>
-        
+
                     </div>
-        
+
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
                             <input formControlName="price" [ngClass]="{'border-red-500':price.invalid && price.touched}"
@@ -116,7 +115,7 @@
                             </p>
                         </div>
                     </div>
-        
+
                     <div class="-mx-3 md:flex mb-6">
                         <div class="md:w-full px-3">
                             <textarea formControlName="description"
@@ -128,12 +127,12 @@
                             </p>
                         </div>
                     </div>
-        
+
                     <div class="mt-6 flex items-center justify-between">
                         <div class="flex items-center">
                         </div>
                     </div>
-        
+
                     <div class="mt-6">
                         <button type="submit" [disabled]="pForm.invalid" [ngClass]="{'opacity-50
                                 cursor-not-allowed':pForm.invalid}"
@@ -149,7 +148,7 @@
                             List Now
                         </button>
                     </div>
-        
+
                 </form>
             </div>
         </div>

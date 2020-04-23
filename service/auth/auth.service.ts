@@ -29,45 +29,46 @@ export class AuthService {
           return of(null);
         }
       })
-    )
-    this.user$.subscribe(user => { this.currentuser = user })
+    );
+    this.user$.subscribe(user => this.currentuser = user);
   }
   getId(): string {
-    
+
     return this.currentuser.uid;
   }
 
-  get name():string{
+  get name(): string {
     return this.currentuser.displayName;
   }
 
-  set address(shipAddress:string){
+  set address(shipAddress: string) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    console.log(shipAddress)
-    let shippingdata = { ...this.currentuser,shippingAddress:shipAddress};
+    console.log(shipAddress);
+    const shippingdata = { ...this.currentuser, shippingAddress: shipAddress};
     console.log(shippingdata);
     userRef.set(shippingdata, { merge: true });
   }
 
   set creditCard(cardNumber:string){
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    let shippingdata = { ...this.currentuser,creditCard:cardNumber};
+    const shippingdata = { ...this.currentuser, creditCard: cardNumber};
     userRef.set(shippingdata, { merge: true });
   }
 
-  set CVV(Cvv:number){
+  set CVV(Cvv: number){
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    let data = { ...this.currentuser,cvv:Cvv};
+    const data = { ...this.currentuser,cvv: Cvv};
     userRef.set(data, { merge: true });
   }
 
   async emailSignIn(email: string, password: string) {
     const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-    if (credential.user.emailVerified == false) {
-      this.message.error("The email is not verified")
-      this.signOut();
+    if (credential.user.emailVerified === false) {
+      console.log(credential.user);
+      this.message.error('The email is not verified');
+      await this.signOut();
     } else {
-      this.message.success("You have sucessfully Sign In")
+      this.message.success('You have sucessfully Sign In');
       return this.updateUserData(credential.user);
     }
 
@@ -87,7 +88,7 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL || '',
-      emailVerified: user.emailVerified,  
+      emailVerified: user.emailVerified,
     };
     return userRef.set(data, { merge: true });
   }
@@ -96,11 +97,11 @@ export class AuthService {
     try {
       const credential = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
       const credential2 = await this.afAuth.auth.currentUser.sendEmailVerification();
-      const credential3 = await this.afAuth.auth.currentUser.updateProfile({ displayName: name })
-      this.message.success("Register Success, please Verify Your email")
-      this.signOut();
+      const credential3 = await this.afAuth.auth.currentUser.updateProfile({ displayName: name });
+      this.message.success('Register Success, please Verify Your email');
+      await this.signOut();
     } catch (err) {
-      this.message.error(err.message)
+      this.message.error(err.message);
       console.log(err.code);
       console.log(err.message);
     }
@@ -108,7 +109,7 @@ export class AuthService {
 
   async signOut() {
     await this.afAuth.auth.signOut();
-    this.message.success("Sign Out Success")
-    this.router.navigate(['/']);
+    this.message.success('Sign Out Success');
+    await this.router.navigate(['/']);
   }
 }

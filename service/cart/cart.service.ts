@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../interface/product'
-import { CartItem } from 'interface/cart-item';
+import { Product } from '../../interface/product';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  itemObs:Observable<[]>
+  itemObs: Observable<[]>;
   items = [];
-  quantity = {}
+  quantity = {};
 
   addToCart(product: Product) {
     if (this.quantity[product.Id] > 0) {
@@ -24,16 +23,18 @@ export class CartService {
 
   totalPrice(): number {
     let total = 0;
-    this.items.forEach(item => total += item.price * this.quantity[item.Id])
+    this.items.forEach(item => total += item.price * this.quantity[item.Id]);
     return total;
   }
 
   deleteFromCart(product: Product) {
-    this.items.filter((item: Product) => {
-      item.Id != product.Id
-      console.log(item.Id)
-      console.log(product.Id)
-    })
+    this.items = this.items.filter((item: Product) => {
+      console.log(item.Id);
+      console.log(product.Id);
+      return item.Id !== product.Id;
+    }
+    );
+
   }
 
 
