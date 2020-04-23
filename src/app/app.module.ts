@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductsComponent } from './products/products.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -34,6 +34,9 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { SummaryComponent } from './summary/summary.component';
 import { UploadPictureComponent } from './upload-picture/upload-picture.component';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { ProfileProductComponent } from './profile-product/profile-product.component';
+import { UserEditProductComponent } from './user-edit-product/user-edit-product.component';
+import { ProfileProductDetailComponent } from './profile-product-detail/profile-product-detail.component';
 registerLocaleData(en);
 @NgModule({
   declarations: [
@@ -55,6 +58,9 @@ registerLocaleData(en);
     ShippingAddressComponent,
     SummaryComponent,
     UploadPictureComponent,
+    ProfileProductComponent,
+    UserEditProductComponent,
+    ProfileProductDetailComponent,
 
   ],
   imports: [
@@ -73,8 +79,8 @@ registerLocaleData(en);
     HttpClientModule,
     FontAwesomeModule
   ],
-  exports:[ AngularFireAuthGuardModule,],
-  providers: [{ provide: NZ_I18N, useValue: en_US },AngularFireStorageModule,],
+  exports: [ AngularFireAuthGuardModule, ],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, AngularFireStorageModule, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

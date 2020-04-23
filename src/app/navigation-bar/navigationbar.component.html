@@ -62,7 +62,9 @@
                                         nz-menu-item> <i nz-icon nzType="user" nzTheme="outline"></i> User Setting</li>
                                     <li nz-menu-item (click)="auth.signOut()"><i nz-icon nzType="logout"
                                             nzTheme="outline"></i>Log Out</li>
+                                    <li nz-menu-item [routerLink]="['userproducts']">Manage Your Product</li>
                                 </ul>
+
                             </nz-dropdown-menu>
                             <button class="ml-3 px-6" nz-button nzType='danger' nzSize="large"
                                 [routerLink]="['/sell']">Sell</button>

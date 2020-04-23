@@ -30,7 +30,12 @@ export class AuthService {
         }
       })
     );
-    this.user$.subscribe(user => this.currentuser = user);
+    this.user$.subscribe(user => {
+        console.log(user);
+        this.currentuser = user;
+        console.log(this.currentuser);
+      }
+    );
   }
   getId(): string {
 
@@ -49,15 +54,15 @@ export class AuthService {
     userRef.set(shippingdata, { merge: true });
   }
 
-  set creditCard(cardNumber:string){
+  set creditCard(cardNumber: string) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
     const shippingdata = { ...this.currentuser, creditCard: cardNumber};
     userRef.set(shippingdata, { merge: true });
   }
 
-  set CVV(Cvv: number){
+  set CVV(Cvv: number) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    const data = { ...this.currentuser,cvv: Cvv};
+    const data = { ...this.currentuser, cvv: Cvv};
     userRef.set(data, { merge: true });
   }
 

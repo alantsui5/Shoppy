@@ -1,0 +1,37 @@
+<section class="bg-white pb-8 pt-4">
+
+  <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+
+    <nav id="store" class="w-full top-0 px-6 py-1">
+      <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+
+        <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">
+          My Products
+        </a>
+      </div>
+    </nav>
+
+    <div *ngFor="let product of userProduct" class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+      <a>
+        <img class="hover:grow hover:shadow-lg" [src]="product.image" [routerLink]="['/userproductsdetail',product.Id]"
+             routerLinkActive="router-link-active">
+
+        <div class="pt-3 flex items-center justify-between">
+          <p [routerLink]="['/userproductsdetail',product.Id]">{{product.name}}</p>
+          <button nz-button nzType="primary" [routerLink]="['/userproductsdetail',product.Id]">Edit Product</button>
+        </div>
+        <p class="pt-1 text-gray-900">${{product.price}}</p>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<div *ngIf="noProduct" class="mx-32">
+  You are not selling any products! Go to sell it now!
+  <button routerLink="/sell"
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+    Sell products
+  </button>
+</div>

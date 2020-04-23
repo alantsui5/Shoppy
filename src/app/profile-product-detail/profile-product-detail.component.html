@@ -1,0 +1,48 @@
+<div class='md:mt-20 mt-10 flex justify-center align-center'
+     *ngIf="product$ | async as product; else NoProductOrLoading">
+  <div class="md:grid grid-cols-2 mx-5 border border-grey-light lg:border-grey-light bg-white rounded">
+    <div class="m-5">
+      <img class=" flex-none object-cover rounded text-center overflow-hidden image-size" src={{product.image}}
+           title="Woman holding a mug" />
+    </div>
+    <div class="relative p-4 lg:flex flex-col justify-between leading-normal">
+      <div class="mb-8">
+        <div class="flex justify-between">
+          <div class="text-sm text-grey-dark flex items-center">
+            <div class="flex items-center">
+              <img class="w-10 h-10 rounded-full mr-4 " src={{userPic}} alt="Avatar">
+              <div class="text-sm">
+                <p class="text-black leading-none">{{userName}}</p>
+                <!--<p class="text-grey-dark">Aug 18</p>-->
+              </div>
+            </div>
+          </div>
+          <div class="text-sm text-grey-dark flex items-center">
+            <td><button nz-button nzType="danger" (click)="deleteProduct()">Delete Products</button></td>
+          </div>
+
+
+
+        </div>
+
+        <div class="mt-5 text-3xl mb-2 text-indigo-600 border-b-1">{{product.price |currency}}
+        </div>
+        <div class="text-black text-4xl mb-2">{{product.name}}</div>
+
+        <p class="text-grey-darker text-base">{{product.description}}</p>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #NoProductOrLoading>
+  <div *ngIf="loading">
+    Loading...
+  </div>
+  <div *ngIf="!loading">
+    {{loading}}
+    You have cancel your upload!
+  </div>
+  <button [routerLink]="['/products']">Go Back</button>
+</ng-template>

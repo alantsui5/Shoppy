@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { trigger, transition, style, animate } from "@angular/animations";
+import { trigger, transition, style, animate } from '@angular/animations';
 import { AuthService } from 'service/auth/auth.service';
 
 @Component({
@@ -23,16 +23,8 @@ import { AuthService } from 'service/auth/auth.service';
   ]
 })
 export class AppComponent {
-  navitems = [
-    { title: "Product", link: "/products" },
-    { title: "About Us", link: "/about" },
-    { title: "Cart", link: "/cart" }
-  ]
-  title = "Shoppy";
+
+  title = 'Shoppy';
   open = false;
   constructor(public auth: AuthService) { }
-  toggler() {
-    this.open = !this.open
-  }
-
 }
