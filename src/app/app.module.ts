@@ -37,6 +37,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ProfileProductComponent } from './profile-product/profile-product.component';
 import { UserEditProductComponent } from './user-edit-product/user-edit-product.component';
 import { ProfileProductDetailComponent } from './profile-product-detail/profile-product-detail.component';
+import { SalesFigureComponent } from './sales-figure/sales-figure.component';
 registerLocaleData(en);
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ registerLocaleData(en);
     ProfileProductComponent,
     UserEditProductComponent,
     ProfileProductDetailComponent,
+    SalesFigureComponent,
 
   ],
   imports: [
