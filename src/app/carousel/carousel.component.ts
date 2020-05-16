@@ -12,10 +12,20 @@ import { NzMessageService } from 'ng-zorro-antd';
 })
 export class CarouselComponent implements OnInit {
 
+  /**
+   * Array of Recent products
+   */
   slides: Product[];
+  /**
+   * Observable of array of Recent products
+   */
   slides$: Observable<Product[]>;
+
   constructor(private db: AngularFirestore, private cartService: CartService, private message: NzMessageService) { }
 
+  /**
+   * Fetch Recent products and save to slides[] variable
+   */
   ngOnInit(): void {
     this.slides$ = this.db.collection<Product>('products',
       (ref: any) => ref.orderBy('name').limit(4)
@@ -23,6 +33,10 @@ export class CarouselComponent implements OnInit {
     this.slides$.subscribe(slides => this.slides = slides);
   }
 
+  /**
+   * Add a product to cart
+   * @param {Product} product, the selected product
+   */
   addToCart(product: Product) {
     this.cartService.addToCart(product);
     this.message.info('Your product has been added to the cart!');

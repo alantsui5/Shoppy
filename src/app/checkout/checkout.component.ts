@@ -10,43 +10,19 @@ export class CheckoutComponent {
 
   index = 'First-content';
 
-  pre(): void {
-    this.current -= 1;
-    this.changeContent();
-  }
 
+
+  /**
+   * change the slide number of the page
+   * @param {number} value The count from shopping address module 
+   */
   changeCurrent(value:number){
     console.log("Go to change current")
     this.current = value;
   }
 
-  next(): void {
-    this.current += 1;
-    this.changeContent();
-  }
-
   done(): void {
     console.log('done');
-  }
-
-  changeContent(): void {
-    switch (this.current) {
-      case 0: {
-        this.index = 'First-content';
-        break;
-      }
-      case 1: {
-        this.index = 'Second-content';
-        break;
-      }
-      case 2: {
-        this.index = 'third-content';
-        break;
-      }
-      default: {
-        this.index = 'error';
-      }
-    }
   }
 
   constructor() {}

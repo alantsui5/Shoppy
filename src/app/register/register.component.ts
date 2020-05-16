@@ -7,11 +7,15 @@ import { AuthService } from 'service/auth/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  /** register form group */
   rForm: FormGroup;
   constructor(private fb: FormBuilder, public auth: AuthService) { }
-  // Form state
+  /** State of Loading */
   loading = false;
+  /** State of success */
   success = false;
+
+  /** Get email, password, name from user input */
   ngOnInit() {
     this.rForm = this.fb.group({
       email: ['', [
@@ -31,6 +35,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  /** send the user register request to the backend and get response */
   async registering() {
     this.loading = true;
     let name = this.rForm.value.name;
@@ -39,17 +44,21 @@ export class RegisterComponent implements OnInit {
     await this.auth.register(email, password, name)
     this.loading = false;
   }
+
+  /** get the validity of email input */
   get email() {
     return this.rForm.get('email');
   }
 
+  /** get the validity of password input */
   get password() {
     return this.rForm.get('password');
   }
+  /** get the validity of passwordConfirm input */
   get passwordConfirm() {
     return this.rForm.get('passwordConfirm');
   }
-
+  /** get the validity of name input */
   get name() {
     return this.rForm.get('name');
   }

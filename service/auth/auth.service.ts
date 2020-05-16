@@ -14,8 +14,17 @@ import { NzMessageService } from "ng-zorro-antd";
   providedIn: "root",
 })
 export class AuthService {
+  /**
+   * User Observable 
+   */
   user$: Observable<User>;
+  /**
+   * currentuser logged in
+   */ 
   currentuser: User;
+  /**
+   * Sync the edited user profile to user in database and authenticator
+   */
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -44,7 +53,10 @@ export class AuthService {
   get name(): string {
     return this.currentuser.displayName;
   }
-
+/** 
+   * Set creditcard value of user
+   * @param {string} cardNumber user credit card number
+   */
   set address(shipAddress: string) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${this.currentuser.uid}`
@@ -52,7 +64,10 @@ export class AuthService {
     const shippingdata = { ...this.currentuser, shippingAddress: shipAddress };
     userRef.set(shippingdata, { merge: true });
   }
-
+/** 
+   * Set creditcard value of user
+   * @param {string} cardNumber user credit card number
+   */
   set creditCard(cardNumber: string) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${this.currentuser.uid}`
@@ -60,7 +75,10 @@ export class AuthService {
     const shippingdata = { ...this.currentuser, creditCard: cardNumber };
     userRef.set(shippingdata, { merge: true });
   }
-
+/** 
+   * Set CVV of user
+   * @param {number} CVV user credit card CVV number
+   */
   set CVV(Cvv: number) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${this.currentuser.uid}`
@@ -68,7 +86,11 @@ export class AuthService {
     const data = { ...this.currentuser, cvv: Cvv };
     userRef.set(data, { merge: true });
   }
-
+/**
+   * Perform user sign in, determine whether user has verified email
+   * @param {string} email user email
+   * @param {number} password user password
+   */
   async emailSignIn(email: string, password: string) {
     const credential = await this.afAuth.auth.signInWithEmailAndPassword(
       email,
@@ -82,12 +104,17 @@ export class AuthService {
       return this.updateUserData(credential.user);
     }
   }
+  /**
+   * Google signin function
+   */
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
     return this.updateUserData(credential.user);
   }
-
+/**
+   * Sync the edited user profile to user in database and authenticator
+   */  
   updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument = this.afs.doc(`users/${user.uid}`);
@@ -101,7 +128,12 @@ export class AuthService {
     };
     return userRef.set(data, { merge: true });
   }
-
+/** 
+   * Perform user register, put the detail of user to user database
+   * @param {string} email user email
+   * @param {number} password user password
+   * @param {string} name user name
+   */
   async register(email: string, password: string, name: string) {
     try {
       const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
@@ -120,7 +152,9 @@ export class AuthService {
       console.log(err.message);
     }
   }
-
+/** 
+   * Perform user signout
+   */
   async signOut() {
     await this.afAuth.auth.signOut();
     this.message.success("Sign Out Success");

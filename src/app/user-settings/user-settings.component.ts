@@ -21,7 +21,7 @@ export class UserSettingsComponent implements OnInit {
      private router:Router, private message:NzMessageService, private db:AngularFirestore,private fireauth:AngularFireAuth) {}
 
 
-  // Image uploader
+  /** Image uploader */
   imgSrc: string;
   selectedImage: any = null;
   isSubmitted: boolean;
@@ -31,10 +31,10 @@ export class UserSettingsComponent implements OnInit {
   task: AngularFireUploadTask;
   downloadURL: string;
   
-  // Fetch user details for that user
+  /** Fetch user details for that user */
   usersCollection: AngularFirestoreCollection<User>;
   
-  // Show image preview
+  /** Show image preview */
   showPreview(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader;
@@ -48,9 +48,10 @@ export class UserSettingsComponent implements OnInit {
     }
   }
   
-  
+  /** The user input form */
   validateForm: FormGroup;
 
+  /** Submit the user input(including the image) to backend */
   submitForm(): void {
    this.loading  = true;
    let name = this.validateForm.value.name;
@@ -66,7 +67,7 @@ export class UserSettingsComponent implements OnInit {
       fileRef.getDownloadURL().subscribe((url) => {
         let imageUrl = url;
         console.log(imageUrl);
-        //this.task = this.storage.upload(filePath, this.selectedImage);
+        this.task = this.storage.upload(filePath, this.selectedImage);
         this.message.info("Your avatar is already updated");
         this.fireauth.auth.currentUser.updateProfile({
           displayName:name,

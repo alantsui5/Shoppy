@@ -10,13 +10,21 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  passwordVisible = false;
+
+  /** The form object */
   myForm: FormGroup;
+
+  /** Google icon */
   faGoogle = faGoogle;
+
+  /** Loading State */
   loading = false;
+
+  /** Success State */
   success = false;
   constructor(private fb: FormBuilder, public auth: AuthService, private router: Router, private message: NzMessageService) { }
 
+  /** retrieve email and password value from user input */
   ngOnInit(): void {
     this.myForm = this.fb.group({
       email: ['', Validators.required],
@@ -24,6 +32,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /** Submit the form to the backend and do login verification */
   async submitHandler() {
     this.loading = true;
     const email = this.myForm.value.email;

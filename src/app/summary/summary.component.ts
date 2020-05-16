@@ -17,7 +17,7 @@ export class SummaryComponent {
     private db: AngularFirestore,
     private auth: AuthService
   ) {}
-
+  /** Move the items from cart to ordered stocks */
   cartToOrder() {
     this.cartService.items.forEach((item) => {
       this.db
@@ -27,11 +27,13 @@ export class SummaryComponent {
         .add({ ...item, arrivalDate: this.arrivalDate() });
     });
   }
+  /** Calculate the arrival date of the stock */
   arrivalDate() {
     const date = new Date();
     date.setDate(date.getDate() + 7);
     return date;
   }
+  /** Submit the confirmation of the purchase */ 
   submit() {
     this.cartToOrder();
     this.msg.success("Checkout completed");

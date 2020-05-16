@@ -13,14 +13,27 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
+
+  /** A selected product from backend */
   productDocument: AngularFirestoreDocument<Product>;
+
+  /** Selected product observable from backend */
   product$: Observable<Product>;
+
+  /** user id of seller */
   userId: string
+  /** user picture of seller */
   userPic: string;
+
+  /** user name of seller */
   userName: string;
+
+  /** loading state */
   loading = true
+
   constructor(private route: ActivatedRoute, private db: AngularFirestore, private cartService: CartService, private message: NzMessageService) { }
 
+  /** Parse route link and fetch product from selected product id */
   ngOnInit() {
     this.loading = true;
     this.route.paramMap.subscribe(params => {
@@ -37,6 +50,7 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
+  /** Get user name from current user id */
   getUserNameFromId() {
     this.db.doc<User>('users/' + this.userId).valueChanges().subscribe(user => {
       this.userName = user?.displayName;
@@ -45,8 +59,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
 
-
-
+  /** Add product to cart
+   * @param {Product} product Add selected product to cart
+   */
   addToCart(product: Product) {
     this.cartService.addToCart(product);
     this.message.info('Your product has been added to the cart!');

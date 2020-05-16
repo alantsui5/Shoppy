@@ -10,12 +10,17 @@ import {Observable} from 'rxjs';
   styleUrls: ['./profile-product.component.scss']
 })
 export class ProfileProductComponent implements OnInit {
+  /** Products collection from selected user */
   private userProductsCollection: AngularFirestoreCollection<Product>;
+  /** Products array from selected user */
   userProduct: Product[] = [];
+
+  /** State showing whether there are products */
   noProduct = true;
 
   constructor(private firestore: AngularFirestore, private auth: AuthService) {}
 
+  /** Fetch products from backend to userProduct */
   ngOnInit(): void {
     this.firestore.collection<Product>('products',
         product => product.where('userId', '==', this.auth.currentuser.uid)
@@ -29,6 +34,7 @@ export class ProfileProductComponent implements OnInit {
 
   }
 
+  /** Check whether there are products */
   private checkValid() {
     if (this.userProduct.length === 0) {
       this.noProduct = true;

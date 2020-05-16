@@ -13,19 +13,27 @@ import {User} from 'firebase';
   styleUrls: ['./profile-product-detail.component.scss']
 })
 export class ProfileProductDetailComponent implements OnInit {
-
+  /** A selected product from backend */
   productDocument: AngularFirestoreDocument<Product>;
+  /** Selected product observable from backend */
   product$: Observable<Product>;
+  /** user id of seller */
   userId: string;
+  /** user picture of seller */
   userPic: string;
+  /** user name of seller */
   userName: string;
+  /** loading state */
   loading = true;
+  /** editing state */
   editState = false;
+
   itemToEdit: Product;
   productId: string;
   constructor(private route: ActivatedRoute, private message: NzMessageService,
               private firestore: AngularFirestore, private router: Router) { }
 
+  /** get the product id from route links and fetch selected product from that id */
   ngOnInit() {
     this.loading = true;
     this.route.paramMap.subscribe(params => {
@@ -43,6 +51,7 @@ export class ProfileProductDetailComponent implements OnInit {
     });
   }
 
+  /** Get seller name from seller */
   getUserNameFromId() {
     this.firestore.doc<User>('users/' + this.userId).valueChanges().subscribe(user => {
       this.userName = user?.displayName;
@@ -50,6 +59,7 @@ export class ProfileProductDetailComponent implements OnInit {
     });
   }
 
+  /** delete the product */
   deleteProduct() {
     this.firestore.collection('products').doc(this.productId).delete().then(r =>
       this.message.success('Delete Product Success')
