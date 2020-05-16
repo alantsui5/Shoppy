@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
-import { auth } from 'firebase/app';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { User } from '../../interface/user';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { NzMessageService } from 'ng-zorro-antd';
+import { Injectable } from "@angular/core";
+import { auth } from "firebase/app";
+import { AngularFireAuth } from "@angular/fire/auth";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from "@angular/fire/firestore";
+import { Router } from "@angular/router";
+import { User } from "../../interface/user";
+import { Observable, of } from "rxjs";
+import { switchMap } from "rxjs/operators";
+import { NzMessageService } from "ng-zorro-antd";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
   user$: Observable<User>;
@@ -20,7 +23,7 @@ export class AuthService {
     private message: NzMessageService
   ) {
     this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
+      switchMap((user) => {
         // Logged in
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
@@ -30,15 +33,11 @@ export class AuthService {
         }
       })
     );
-    this.user$.subscribe(user => {
-        console.log(user);
-        this.currentuser = user;
-        console.log(this.currentuser);
-      }
-    );
+    this.user$.subscribe((user) => {
+      this.currentuser = user;
+    });
   }
   getId(): string {
-
     return this.currentuser.uid;
   }
 
@@ -47,36 +46,41 @@ export class AuthService {
   }
 
   set address(shipAddress: string) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    console.log(shipAddress);
-    const shippingdata = { ...this.currentuser, shippingAddress: shipAddress};
-    console.log(shippingdata);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${this.currentuser.uid}`
+    );
+    const shippingdata = { ...this.currentuser, shippingAddress: shipAddress };
     userRef.set(shippingdata, { merge: true });
   }
 
   set creditCard(cardNumber: string) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    const shippingdata = { ...this.currentuser, creditCard: cardNumber};
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${this.currentuser.uid}`
+    );
+    const shippingdata = { ...this.currentuser, creditCard: cardNumber };
     userRef.set(shippingdata, { merge: true });
   }
 
   set CVV(Cvv: number) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentuser.uid}`);
-    const data = { ...this.currentuser, cvv: Cvv};
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${this.currentuser.uid}`
+    );
+    const data = { ...this.currentuser, cvv: Cvv };
     userRef.set(data, { merge: true });
   }
 
   async emailSignIn(email: string, password: string) {
-    const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    const credential = await this.afAuth.auth.signInWithEmailAndPassword(
+      email,
+      password
+    );
     if (credential.user.emailVerified === false) {
-      console.log(credential.user);
-      this.message.error('The email is not verified');
+      this.message.error("The email is not verified");
       await this.signOut();
     } else {
-      this.message.success('You have sucessfully Sign In');
+      this.message.success("You have sucessfully Sign In");
       return this.updateUserData(credential.user);
     }
-
   }
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
@@ -92,7 +96,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL || '',
+      photoURL: user.photoURL || "",
       emailVerified: user.emailVerified,
     };
     return userRef.set(data, { merge: true });
@@ -100,10 +104,15 @@ export class AuthService {
 
   async register(email: string, password: string, name: string) {
     try {
-      const credential = await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      const credential = await this.afAuth.auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
       const credential2 = await this.afAuth.auth.currentUser.sendEmailVerification();
-      const credential3 = await this.afAuth.auth.currentUser.updateProfile({ displayName: name });
-      this.message.success('Register Success, please Verify Your email');
+      const credential3 = await this.afAuth.auth.currentUser.updateProfile({
+        displayName: name,
+      });
+      this.message.success("Register Success, please Verify Your email");
       await this.signOut();
     } catch (err) {
       this.message.error(err.message);
@@ -114,7 +123,7 @@ export class AuthService {
 
   async signOut() {
     await this.afAuth.auth.signOut();
-    this.message.success('Sign Out Success');
-    await this.router.navigate(['/']);
+    this.message.success("Sign Out Success");
+    await this.router.navigate(["/"]);
   }
 }

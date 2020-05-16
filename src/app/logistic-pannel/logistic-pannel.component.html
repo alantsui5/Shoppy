@@ -1,0 +1,23 @@
+<p class="text-3xl">Order and logistic Pannel</p>
+
+<nz-table #basicTable [nzData]="order$ | async" class="px-5">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Arrival Date</th>
+      <th>Arrived or not</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.name }}</td>
+      <td>{{ convertToDate(data.arrivalDate) }}</td>
+      <td *ngIf="isArrived(data.arrivalDate)" class="text-green-500">
+        The stock is arrived
+      </td>
+      <td *ngIf="!isArrived(data.arrivalDate)" class="text-red-500">
+        The stock is delivering, please wait
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
