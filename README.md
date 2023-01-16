@@ -1,7 +1,5 @@
 # Shoppy Project
 
-This is a CSCI3100 Project Code
-
 ## Technical Stack(& reference/credit)
 
 1. Frontend: Angular
